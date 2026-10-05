@@ -1,0 +1,30 @@
+ORG 0000H
+
+  MAIN:
+   
+   SETB P1.0          ;HIGH (ON)
+   ACALL DELAY
+   CLR P1.0	      ;LOW (OFF)
+   ACALL DELAY
+   JMP MAIN          ;(SHORT JUMP)
+   
+
+   
+  ;DELAY STARTS HERE 
+  
+  DELAY:
+      
+      MOV R7,#255      ;OUTER LOOP
+      
+  D1:
+      MOV R6, #255     ;INNER LOOP
+  D2:
+      DJNZ R6,D2       ;DECREMENT NOT EQUAL TO ZERO
+      DJNZ R7,D1
+      
+  ;DELAY ENDS HERE   
+      
+  RET
+
+END  
+   
