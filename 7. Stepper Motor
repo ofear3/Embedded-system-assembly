@@ -1,0 +1,31 @@
+;=====STEPPER MOTOR======;
+
+ORG 0000H
+
+MAIN:
+   ;STEP 1 PATTERN
+   MOV P1,#01H
+   ACALL DELAY
+   
+   MOV P1,#02H
+   ACALL DELAY
+   
+   MOV P1,#04H
+   ACALL DELAY
+   
+   MOV P1,#08H
+   ACALL DELAY
+   
+   SJMP MAIN
+   
+   ;=====DEALAY=====;
+   DELAY:
+      MOV R2, #255
+   DELAY_LOOP1:
+      MOV R3, #255
+   DELAY_LOOP2:
+      DJNZ R3, DELAY_LOOP2
+      DJNZ R2, DELAY_LOOP1
+      RET
+      
+END   
