@@ -1,0 +1,37 @@
+ORG 0000H
+
+MAIN:
+    CLR P1.0
+    CLR P1.1
+    CLR P1.2
+
+    ; First light
+    SETB P1.0
+    ACALL DELAY
+    ACALL DELAY
+    CLR P1.0
+
+    ; Second light
+    SETB P1.1
+    ACALL DELAY
+    ACALL DELAY
+    CLR P1.1
+
+    ; Third light
+    SETB P1.2
+    ACALL DELAY
+    ACALL DELAY
+    CLR P1.2
+
+    SJMP MAIN
+
+DELAY:
+    MOV R2, #255
+DELAY_LOOP1:
+    MOV R3, #255
+DELAY_LOOP2:
+    DJNZ R3, DELAY_LOOP2
+    DJNZ R2, DELAY_LOOP1
+    RET
+
+END
