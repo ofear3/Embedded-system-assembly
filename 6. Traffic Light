@@ -1,37 +1,29 @@
-ORG 0000H
+#include <reg51.H>
 
-MAIN:
-    CLR P1.0
-    CLR P1.1
-    CLR P1.2
+sbit RED = P2^0;
+sbit YELLOW = P2^1;
+sbit GREEN = P2^2;
 
-    ; First light
-    SETB P1.0
-    ACALL DELAY
-    ACALL DELAY
-    CLR P1.0
+void Delay(){
+    int i, j;
 
-    ; Second light
-    SETB P1.1
-    ACALL DELAY
-    ACALL DELAY
-    CLR P1.1
+    for(i = 0; i < 10; i++) {
+        for(j = 0; j < 10000; j++);
+    }
+}
 
-    ; Third light
-    SETB P1.2
-    ACALL DELAY
-    ACALL DELAY
-    CLR P1.2
+void main(){
+    while(1){
+        RED = 1;
+        Delay();
+        RED = 0;
 
-    SJMP MAIN
+        YELLOW = 1;
+        Delay();
+        YELLOW = 0;
 
-DELAY:
-    MOV R2, #255
-DELAY_LOOP1:
-    MOV R3, #255
-DELAY_LOOP2:
-    DJNZ R3, DELAY_LOOP2
-    DJNZ R2, DELAY_LOOP1
-    RET
-
-END
+        GREEN = 1;
+        Delay();
+        GREEN = 0;
+    }
+}
